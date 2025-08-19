@@ -1,0 +1,40 @@
+name: Build Task Manager
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Tailwind CSS
+        run: npm run build:tailwind
+
+      - name: Package Electron app
+        run: npx electron-packager ./ electron-task-manager --platform=${{ matrix.os == 'ubuntu-latest' && 'linux' || (matrix.os == 'windows-latest' && 'win32' || 'darwin') }} --arch=x64 --out=dist --overwrite
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: task-manager-${{ matrix.os }}
+          path: dist/**

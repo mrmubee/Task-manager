@@ -1,0 +1,6 @@
+/* Additional small tweaks */
+body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; color:#0f172a; }
+.task.completed { opacity: 0.6; text-decoration: line-through; }
+.task[data-priority="high"] { border-left: 4px solid #ef4444; }
+.task[data-priority="medium"] { border-left: 4px solid #f59e0b; }
+.task[data-priority="low"] { border-left: 4px solid #10b981; }

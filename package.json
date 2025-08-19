@@ -1,0 +1,17 @@
+{
+  "name": "task-manager-final",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enhanced Task Manager with PBKDF2 and local CSS; instructions to build Tailwind and Electron binaries.",
+  "scripts": {
+    "build:tailwind": "npx tailwindcss -i ./src/input.css -o ./tailwind.css --minify",
+    "dev:tailwind": "npx tailwindcss -i ./src/input.css -o ./tailwind.css --watch",
+    "start:electron": "electron .",
+    "pack:electron": "electron-packager . TaskManager --platform=win32,linux,darwin --arch=x64 --out=dist --overwrite"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "electron": "^25.0.0",
+    "electron-packager": "^17.0.0"
+  }
+}
